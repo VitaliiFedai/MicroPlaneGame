@@ -25,6 +25,11 @@ namespace CustomUI
             OpenPanel(panelPrefab);
         }
 
+        public void EnterScene()
+        {
+            OnEnterScene();
+        }
+
         public virtual void ExitScene()
         {
             if (_activePanel != null)
@@ -32,11 +37,6 @@ namespace CustomUI
                 UnbindPanelEvents(_activePanel);
             }
             OnExitScene();
-        }
-
-        public void EnterScene()
-        {
-            OnEnterScene();
         }
 
         protected void OpenPanel(IPanel panelPrefab)

@@ -23,6 +23,7 @@ public class RallyPointSystem : IRallyPointsHolder, IRallyPointsChain, IRallyPoi
         if (HasNextPoint())
         {
             ActivateNextPoint();
+            SetAllDistances();
         }
     }
 
@@ -141,29 +142,19 @@ public class RallyPointSystem : IRallyPointsHolder, IRallyPointsChain, IRallyPoi
     {
         OnRallyPointReached?.Invoke(this, rallyPoint);
     }
-}
 
-public interface IRallyPointsHolder
-{
-    public void SetRallyPoints(IEnumerable<RallyPoint> rallyPoints);
-    public void ClearRallyPoints();
-}
+    private void SetAllDistances()
+    {
+        if (_rallyPoints.Count == 0)
+        {
+            return;
+        }
 
-public interface IRallyPointsChain
-{
-    public event Action<IRallyPointsChain, RallyPoint> OnRallyPointReached;
-    public event Action<IRallyPointsChain, RallyPoint> OnRallyPointChanged;
-    public event Action<IRallyPointsChain> OnRallyPointsDisabled;
-    public event Action<IRallyPointsChain, RallyPoint> OnRallyPointsEnabled;
-
-    public RallyPoint CurrentRallyPoint { get; }
-    public bool HasNextPoint();
-    public void ActivateNextPoint();
-    public void DisableAllPoints();
-    public void EnableActivePoint();
-}
-
-public interface IRallyPointsGizmosDrawer
-{
-    public void DrawGizmos();
+        RallyPoint previousPoint = _rallyPoints[0];
+        for (int i = 1; i < _rallyPoints.Count; i++)
+        { 
+            RallyPoint point = _rallyPoints[i];
+            int distance = (int)Vector3.Distance(previousPoint.transform.position, point.transform.position);
+        }
+    }
 }

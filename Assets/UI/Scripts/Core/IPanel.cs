@@ -9,7 +9,6 @@ namespace CustomUI
         public event Action<bool> OnToggleChanged;
 
         public event Action OnCloseRequest;
-        public event Action<Action> OnSceneExitRequest;
         public event Action<IPanel> OnOpenPanelRequest;
         public GameObject GetGameObject();
     }

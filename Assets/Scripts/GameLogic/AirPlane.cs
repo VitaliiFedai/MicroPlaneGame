@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AirPlane : MonoBehaviour
+public class AirPlane : MonoBehaviour, IPauseListener
 {
     private const float TRACE_POINTS_DISTANCE = 10f;
 
@@ -60,7 +60,18 @@ public class AirPlane : MonoBehaviour
 
     private Vector2 _steeringWheelPosition;
     private bool _isAutoPilotEnabled;
-    private float _currentSpeed; 
+    private float _currentSpeed;
+    private bool _isPaused;
+
+    public void OnPause()
+    {
+        _isPaused = true;
+    }
+
+    public void OnResume()
+    {
+        _isPaused = false;
+    }
 
     public void SetSteeringWheel(Vector2 value)
     {
@@ -84,8 +95,13 @@ public class AirPlane : MonoBehaviour
         _lastTrailPoint = transform.position;
     }
 
-    private void Update()
+    public void Update()
     {
+        if (_isPaused)
+        {
+            return;
+        }
+
         float rollAngleRad = GetAngleToHorizon(transform.right) * Mathf.Deg2Rad;
         float sideVectorDirection = -transform.right.y;
         float sinAngleToHorizon = Mathf.Sin(rollAngleRad);

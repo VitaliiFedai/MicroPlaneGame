@@ -34,4 +34,5 @@ public class MainMenuUIHandler : UIHandler
     {
         OpenPanel(_mainMenuPanelPrefab);
     }
+
 }

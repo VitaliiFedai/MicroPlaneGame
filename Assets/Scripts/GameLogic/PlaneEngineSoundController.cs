@@ -1,12 +1,12 @@
 ﻿using System;
 using UnityEngine;
 
-[RequireComponent (typeof(AudioSource))]
-[RequireComponent (typeof(AirPlane))]
+[RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(AirPlane))]
 public class PlaneEngineSoundController : MonoBehaviour
 {
     private const float DEFAULT_PITCH = 1f;
-    
+
     [Range(0f, 1f)]
     [SerializeField] private float _minSpeedPitch;
     [Range(1f, 3f)]
@@ -14,6 +14,16 @@ public class PlaneEngineSoundController : MonoBehaviour
 
     private AudioSource _audioSource;
     private AirPlane _airPlane;
+
+    public void PauseSound()
+    {
+        _audioSource.Pause();
+    }
+    
+    public void ResumeSound()
+    {
+        _audioSource.UnPause();
+    }
 
     private void Awake()
     {

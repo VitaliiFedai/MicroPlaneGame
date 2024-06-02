@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: 22de0b70a4f81e0498a5684386eae622
   - enabled: 1
     path: Assets/Scenes/Gameplay.unity
-    guid: 461812238a56f854e995b07a46657482
+    guid: 5f4ba148f22a3b64db8cf72b1435e14d
   m_configObjects:
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: ca0e956f6f274734a9eb5155d6275ea2,
       type: 2}

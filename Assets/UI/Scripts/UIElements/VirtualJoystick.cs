@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class VirtualJoystick : MonoBehaviour
 {
-    private const float MAX_MOVE_RADIUS = 400f;
+    private const float MAX_MOVE_RADIUS = 300f;
     private const float MAX_MOVE_RADIUS_SQR = MAX_MOVE_RADIUS * MAX_MOVE_RADIUS;
     private const float IGNORED_MOVE_RADIUS = 100;
     private const float RELEASED_MOVE_SPEED = 2000f;
@@ -18,10 +18,16 @@ public class VirtualJoystick : MonoBehaviour
 
     public event Action<Vector2> OnChanged;
 
+    public bool InvertUpDown { get; private set; }
     public bool IsPressed { get; private set; }
 
     private Vector2 _offset;
     private Vector2 _previousMove;
+
+    public void SetInvertUpDown(bool value)
+    {
+        InvertUpDown = value;
+    }
 
     private void OnEnable()
     {
@@ -96,6 +102,10 @@ public class VirtualJoystick : MonoBehaviour
         float distanceNormalized = Mathf.InverseLerp(0f, MAX_MOVE_RADIUS - IGNORED_MOVE_RADIUS, distance);
         Vector2 direction = _slider.transform.localPosition.normalized;
         Vector2 resultMove = distanceNormalized > DELTA ? direction * distanceNormalized : Vector2.zero;
+        if (InvertUpDown)
+        {
+            resultMove.y = -resultMove.y;
+        }
         return resultMove;
     }
 }

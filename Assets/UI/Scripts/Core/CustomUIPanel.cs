@@ -10,7 +10,6 @@ namespace CustomUI
         public event Action<bool> OnToggleChanged;
 
         public event Action OnCloseRequest;
-        public event Action<Action> OnSceneExitRequest;
         public event Action<IPanel> OnOpenPanelRequest;
 
         private UIEventsBinder _eventsBinder;
@@ -31,11 +30,6 @@ namespace CustomUI
             }
             #endif
             OnOpenPanelRequest?.Invoke(panelPrefab);
-        }
-
-        protected void SceneExitRequest(Action onExitCallback)
-        {
-            OnSceneExitRequest?.Invoke(onExitCallback);
         }
 
         protected void CloseRequest()

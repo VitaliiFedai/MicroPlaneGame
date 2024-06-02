@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-
 public class Controller : MonoBehaviour
 {
     [SerializeField] private Button _exitButton;

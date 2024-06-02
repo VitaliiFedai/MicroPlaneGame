@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using Zenject;
 
@@ -25,19 +26,13 @@ public class SoundEffectsSource : MonoBehaviour
         _sfxSource.PlayOneShot(_checkPointSound);
     }
 
-    public async void PlayWinSound(float delay)
+    public void PlayWinSound()
     {
-        await PlayDelayed(_winSound, delay);
+        _sfxSource.PlayOneShot(_winSound);
     }
 
-    public async void PlayLoseSound(float delay)
+    public void PlayLoseSound()
     {
-        await PlayDelayed(_loseSound, delay);
-    }
-
-    private async Task PlayDelayed(AudioClip sound, float delay)
-    {
-        await Task.Delay((int)(delay * 1000));
-        _sfxSource.PlayOneShot(sound);
+        _sfxSource.PlayOneShot(_loseSound);
     }
 }
